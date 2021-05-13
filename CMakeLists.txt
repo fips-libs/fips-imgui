@@ -30,7 +30,7 @@ fips_begin_lib(imgui)
 fips_end_lib()
 
 if (FIPS_CLANG)
-    set_target_properties(imgui PROPERTIES COMPILE_FLAGS "-Wno-type-limits -Wno-missing-field-initializers")
+    set_target_properties(imgui PROPERTIES COMPILE_FLAGS "-Wno-unused-parameter -Wno-type-limits -Wno-missing-field-initializers")
 elseif(FIPS_GCC)
     set_target_properties(imgui PROPERTIES COMPILE_FLAGS "-Wno-unused-but-set-variable -Wno-type-limits -Wno-missing-field-initializers")
 endif()
