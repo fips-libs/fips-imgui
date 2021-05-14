@@ -3,7 +3,7 @@
 #
 
 if (NOT FIPS_IMPORT)
-    cmake_minimum_required(VERSION 2.8)
+    cmake_minimum_required(VERSION 3.0)
     get_filename_component(FIPS_ROOT_DIR "../fips" ABSOLUTE)
     include("${FIPS_ROOT_DIR}/cmake/fips.cmake")
     fips_setup()
@@ -12,7 +12,6 @@ endif()
 
 fips_begin_lib(imgui)
     fips_vs_disable_warnings(4312)   # 'type cast': conversion from 'int' to 'void *' of greater size
-    include_directories(imgui)
     fips_dir(imgui)
     fips_files(
         imconfig.h
@@ -28,6 +27,7 @@ fips_begin_lib(imgui)
         imstb_truetype.h
     )
 fips_end_lib()
+target_include_directories(imgui PUBLIC imgui)
 
 if (FIPS_CLANG)
     set_target_properties(imgui PROPERTIES COMPILE_FLAGS "-Wno-unused-parameter -Wno-type-limits -Wno-missing-field-initializers")

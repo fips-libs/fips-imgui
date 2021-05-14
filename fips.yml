@@ -1,7 +1,5 @@
 # fips-imgui
 ---
 exports:
-    header-dirs:
-        - imgui
     modules:
         imgui: .
