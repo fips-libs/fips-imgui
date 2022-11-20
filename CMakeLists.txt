@@ -1,6 +1,7 @@
 #
 # project: fips-imgui
 #
+set (CMAKE_CXX_STANDARD 11)
 
 if (NOT FIPS_IMPORT)
     cmake_minimum_required(VERSION 3.0)
