@@ -11,7 +11,6 @@ if (NOT FIPS_IMPORT)
 endif()
 
 fips_begin_lib(imgui)
-    fips_vs_disable_warnings(4312)   # 'type cast': conversion from 'int' to 'void *' of greater size
     fips_dir(imgui)
     fips_files(
         imconfig.h
@@ -30,12 +29,10 @@ fips_end_lib()
 target_include_directories(imgui PUBLIC imgui)
 
 if (FIPS_CLANG)
-    set_target_properties(imgui PROPERTIES COMPILE_FLAGS "-Wno-unused-parameter -Wno-type-limits -Wno-missing-field-initializers")
+    target_compile_options(imgui PRIVATE -Wno-unused-parameter -Wno-type-limits -Wno-missing-field-initializers)
 elseif(FIPS_GCC)
-    set_target_properties(imgui PROPERTIES COMPILE_FLAGS "-Wno-unused-but-set-variable -Wno-type-limits -Wno-missing-field-initializers")
-endif()
-
-if (NOT FIPS_IMPORT)
-    fips_finish()
+    target_compile_options(imgui PRIVATE -Wno-unused-but-set-variable -Wno-type-limits -Wno-missing-field-initializers)
+elseif(FIPS_MSVC)
+    target_compile_options(imgui PRIVATE /wd4312)
 endif()
 
